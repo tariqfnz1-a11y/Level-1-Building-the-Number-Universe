@@ -1,259 +1,628 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Level 1: Number Universe | Real Numbers Workbook</title>
-<style>
-:root{--bg:#eef3f7;--ink:#14213d;--card:#fff;--line:#c9d6e2;--mute:#52627a;--N:#1b9aaa;--W:#3a9d5d;--Z:#3b6fd4;--Q:#7b52c9;--Qp:#e8801c;--ok:#16844a;--bad:#c7392f;--hi:#ffe066}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1624;--ink:#e8eef7;--card:#18223a;--line:#2b3a59;--mute:#9db0cc;--hi:#6b5b00}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Trebuchet MS","Segoe UI",system-ui,sans-serif;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;background-attachment:fixed}
-main{max-width:860px;margin:0 auto;padding:16px 14px 80px}
-header{padding:28px 0 8px}
-h1{font-size:2.1rem;line-height:1.15;margin:0 0 6px}
-h2{font-size:1.45rem;margin:0 0 8px}
-.sub{color:var(--mute);margin:0}
-section{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:18px;margin:20px 0;box-shadow:5px 5px 0 var(--ink)}
-.mark{background:var(--hi);padding:0 4px;border-radius:3px}
-.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
-input,select,button{font:inherit;color:var(--ink)}
-input,select{background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:6px 10px;min-width:0}
-input:focus,select:focus,button:focus-visible{outline:3px solid var(--Z);outline-offset:1px}
-button{background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700}
-button.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
-button:disabled{opacity:.4;cursor:default}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border-radius:20px;padding:3px 12px;font-weight:700;border:2px solid var(--line);color:var(--mute)}
-.chip.on{color:#fff;border-color:transparent}
-.chip.N.on,.hN.on{background:var(--N)}.chip.W.on{background:var(--W)}.chip.Z.on{background:var(--Z)}.chip.Q.on{background:var(--Q)}.chip.Qp.on{background:var(--Qp)}.chip.R.on{background:var(--ink);color:var(--bg)}
-svg{max-width:100%;height:auto}
-.set{fill:none;stroke:var(--line);stroke-width:2;transition:fill .25s}
-.set.on{stroke:var(--ink)}
-#sN.on{fill:var(--N)}#sW.on{fill:var(--W)}#sZ.on{fill:var(--Z)}#sQ.on{fill:var(--Q)}#sP.on{fill:var(--Qp)}
-svg text{fill:var(--ink);font-weight:700;font-size:15px}
-.note{border-left:6px solid var(--Qp);background:var(--bg);padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0}
-.mono{font-family:Consolas,Menlo,monospace}
-.steps div{padding:3px 0}
-.ok{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}
-.q{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}
-.q input,.q select{width:110px}
-.bar{height:14px;background:var(--bg);border:2px solid var(--ink);border-radius:8px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
-.badge{display:none;text-align:center;padding:18px;border:3px dashed var(--Qp);border-radius:14px;font-size:1.3rem;font-weight:700}
-.badge.show{display:block}
-details{margin:8px 0}summary{cursor:pointer;font-weight:700}
-.card{font-size:2.4rem;font-weight:700;text-align:center;padding:14px;border:3px solid var(--ink);border-radius:12px;background:var(--bg);margin:8px 0}
-.hm{display:flex;flex-wrap:wrap;gap:8px}
-.hm button{min-width:56px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:520px){.q{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Level 1: Number Universe | Real Numbers Workbook</title>
+  <style>
+    /* ----- clean, self-contained, github-pages friendly ----- */
+    :root {
+      --bg: #eef3f7;
+      --ink: #14213d;
+      --card: #fff;
+      --line: #c9d6e2;
+      --mute: #52627a;
+      --N: #1b9aaa;
+      --W: #3a9d5d;
+      --Z: #3b6fd4;
+      --Q: #7b52c9;
+      --Qp: #e8801c;
+      --ok: #16844a;
+      --bad: #c7392f;
+      --hi: #ffe066;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1624;
+        --ink: #e8eef7;
+        --card: #18223a;
+        --line: #2b3a59;
+        --mute: #9db0cc;
+        --hi: #6b5b00;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 17px/1.6 "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-attachment: fixed;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 16px 14px 80px;
+    }
+    header { padding: 28px 0 8px; }
+    h1 { font-size: 2.1rem; line-height: 1.15; margin: 0 0 6px; }
+    h2 { font-size: 1.45rem; margin: 0 0 8px; }
+    .sub { color: var(--mute); margin: 0; }
+    section {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 18px;
+      margin: 20px 0;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+    .mark { background: var(--hi); padding: 0 4px; border-radius: 3px; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 10px 0; }
+    input, select, button { font: inherit; color: var(--ink); }
+    input, select {
+      background: var(--bg);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 10px;
+      min-width: 0;
+    }
+    input:focus, select:focus, button:focus-visible {
+      outline: 3px solid var(--Z);
+      outline-offset: 1px;
+    }
+    button {
+      background: var(--ink);
+      color: var(--bg);
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button.alt {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+    }
+    button:disabled { opacity: .4; cursor: default; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-weight: 700;
+      border: 2px solid var(--line);
+      color: var(--mute);
+    }
+    .chip.on { color: #fff; border-color: transparent; }
+    .chip.N.on, .hN.on { background: var(--N); }
+    .chip.W.on { background: var(--W); }
+    .chip.Z.on { background: var(--Z); }
+    .chip.Q.on { background: var(--Q); }
+    .chip.Qp.on { background: var(--Qp); }
+    .chip.R.on { background: var(--ink); color: var(--bg); }
+    svg { max-width: 100%; height: auto; }
+    .set { fill: none; stroke: var(--line); stroke-width: 2; transition: fill .25s; }
+    .set.on { stroke: var(--ink); }
+    #sN.on { fill: var(--N); }
+    #sW.on { fill: var(--W); }
+    #sZ.on { fill: var(--Z); }
+    #sQ.on { fill: var(--Q); }
+    #sP.on { fill: var(--Qp); }
+    svg text { fill: var(--ink); font-weight: 700; font-size: 15px; }
+    .note {
+      border-left: 6px solid var(--Qp);
+      background: var(--bg);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      margin: 10px 0;
+    }
+    .mono { font-family: Consolas, Menlo, monospace; }
+    .steps div { padding: 3px 0; }
+    .ok { color: var(--ok); font-weight: 700; }
+    .bad { color: var(--bad); font-weight: 700; }
+    .q {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .q input, .q select { width: 110px; }
+    .bar {
+      height: 14px;
+      background: var(--bg);
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--ok);
+      transition: width .4s;
+    }
+    .badge {
+      display: none;
+      text-align: center;
+      padding: 18px;
+      border: 3px dashed var(--Qp);
+      border-radius: 14px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .badge.show { display: block; }
+    details { margin: 8px 0; }
+    summary { cursor: pointer; font-weight: 700; }
+    .card {
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 14px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--bg);
+      margin: 8px 0;
+    }
+    .hm { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hm button { min-width: 56px; }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+    @media (max-width: 520px) {
+      .q { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 <main>
-<header>
-<h1>Level 1: Building the Number Universe</h1>
-<p class="sub">Mission: every number has a home. By the end, you can look at any number and say <span class="mark">"I know where this number lives!"</span></p>
-<div class="row"><div class="bar" style="flex:1" aria-label="Overall progress"><i id="prog"></i></div><span id="progTxt">0%</span><button class="alt" id="reset">Reset progress</button></div>
-</header>
+  <header>
+    <h1>Level 1: Building the Number Universe</h1>
+    <p class="sub">Mission: every number has a home. By the end, you can look at any number and say <span class="mark">"I know where this number lives!"</span></p>
+    <div class="row">
+      <div class="bar" style="flex:1" aria-label="Overall progress"><i id="prog"></i></div>
+      <span id="progTxt">0%</span>
+      <button class="alt" id="reset">Reset progress</button>
+    </div>
+  </header>
 
-<section>
-<h2>1. Natural numbers: the counting numbers</h2>
-<p>You use them to count pencils, shoes, books and students: <b>N = {1, 2, 3, 4, ...}</b></p>
-<p>Is it a natural number? Type any number and see which houses it lives in (more in Section 7).</p>
-<div class="row"><button class="alt" data-try="7">7 apples</button><button class="alt" data-try="0">0 students</button><button class="alt" data-try="-3">-3 students</button></div>
-<p class="sub">These buttons fill the explorer in Section 7.</p>
-</section>
+  <!-- 1 -->
+  <section>
+    <h2>1. Natural numbers: the counting numbers</h2>
+    <p>You use them to count pencils, shoes, books and students: <b>N = {1, 2, 3, 4, ...}</b></p>
+    <p>Is it a natural number? Type any number and see which houses it lives in (more in Section 7).</p>
+    <div class="row">
+      <button class="alt" data-try="7">7 apples</button>
+      <button class="alt" data-try="0">0 students</button>
+      <button class="alt" data-try="-3">-3 students</button>
+    </div>
+    <p class="sub">These buttons fill the explorer in Section 7.</p>
+  </section>
 
-<section>
-<h2>2. Whole numbers and integers: zero joins, then we go below zero</h2>
-<p><b>Whole = Natural + 0.</b> How many mangoes are left in an empty basket? <b>0</b>. <b>Integers = whole numbers + their negative partners.</b></p>
-<h3 style="margin:8px 0 0">Lift simulator</h3>
-<div class="row"><label for="lift">Floor</label><input type="range" id="lift" min="-6" max="6" value="0" style="flex:1"><b id="floor" class="mono"></b></div>
-<div id="liftOut" class="chips"></div>
-<p id="liftTxt" class="sub"></p>
-</section>
+  <!-- 2 -->
+  <section>
+    <h2>2. Whole numbers and integers: zero joins, then we go below zero</h2>
+    <p><b>Whole = Natural + 0.</b> How many mangoes are left in an empty basket? <b>0</b>. <b>Integers = whole numbers + their negative partners.</b></p>
+    <h3 style="margin:8px 0 0">Lift simulator</h3>
+    <div class="row">
+      <label for="lift">Floor</label>
+      <input type="range" id="lift" min="-6" max="6" value="0" style="flex:1">
+      <b id="floor" class="mono"></b>
+    </div>
+    <div id="liftOut" class="chips"></div>
+    <p id="liftTxt" class="sub"></p>
+  </section>
 
-<section>
-<h2>3. Fractions and decimals: sharing a pizza</h2>
-<p>The <b>denominator</b> says how many equal pieces. The <b>numerator</b> says how many pieces we take.</p>
-<div class="row"><label>Pieces <input type="number" id="den" min="1" max="12" value="4" style="width:70px"></label><label>Taken <input type="number" id="num" min="0" max="12" value="3" style="width:70px"></label></div>
-<div class="row"><svg id="pizza" viewBox="0 0 120 120" width="150" height="150" role="img" aria-label="Pizza slices"></svg><div id="pizzaOut"></div></div>
-</section>
+  <!-- 3 -->
+  <section>
+    <h2>3. Fractions and decimals: sharing a pizza</h2>
+    <p>The <b>denominator</b> says how many equal pieces. The <b>numerator</b> says how many pieces we take.</p>
+    <div class="row">
+      <label>Pieces <input type="number" id="den" min="1" max="12" value="4" style="width:70px"></label>
+      <label>Taken <input type="number" id="num" min="0" max="12" value="3" style="width:70px"></label>
+    </div>
+    <div class="row">
+      <svg id="pizza" viewBox="0 0 120 120" width="150" height="150" role="img" aria-label="Pizza slices"></svg>
+      <div id="pizzaOut"></div>
+    </div>
+  </section>
 
-<section>
-<h2>4. Rational numbers: anything you can write as p/q</h2>
-<p>A number is <b>rational</b> if it can be written as <b class="mono">p/q</b> with p and q integers and q &ne; 0. So 5 = 5/1, -3 = -3/1, 0.5 = 1/2, 0.75 = 3/4.</p>
-<p>Decimals come in two kinds: <b>terminating</b> (0.5 stops, like a runner who says "I'm finished") and <b>recurring</b> (0.333... keeps going round the track). <span class="mark">Both are rational.</span> Try different pieces in the pizza above: a denominator like 3, 6, 7 or 9 gives a recurring decimal.</p>
-<div class="note"><b>Remember:</b> every integer is rational, but not every rational number is an integer. Every car is a vehicle, but not every vehicle is a car.</div>
-</section>
+  <!-- 4 -->
+  <section>
+    <h2>4. Rational numbers: anything you can write as p/q</h2>
+    <p>A number is <b>rational</b> if it can be written as <b class="mono">p/q</b> with p and q integers and q ≠ 0. So 5 = 5/1, -3 = -3/1, 0.5 = 1/2, 0.75 = 3/4.</p>
+    <p>Decimals come in two kinds: <b>terminating</b> (0.5 stops, like a runner who says "I'm finished") and <b>recurring</b> (0.333... keeps going round the track). <span class="mark">Both are rational.</span> Try different pieces in the pizza above: a denominator like 3, 6, 7 or 9 gives a recurring decimal.</p>
+    <div class="note"><b>Remember:</b> every integer is rational, but not every rational number is an integer. Every car is a vehicle, but not every vehicle is a car.</div>
+  </section>
 
-<section>
-<h2>5. Irrational numbers: the song that never repeats</h2>
-<p>&radic;2 = 1.41421356237... goes on forever and never settles into a repeating block. So do &radic;3, &radic;5, &radic;7 and &pi;.</p>
-<div class="note"><b>Golden rule:</b> the square root of a perfect square is rational (&radic;4 = 2, &radic;9 = 3, &radic;25 = 5). The square root of a non-perfect square is irrational.</div>
-</section>
+  <!-- 5 -->
+  <section>
+    <h2>5. Irrational numbers: the song that never repeats</h2>
+    <p>√2 = 1.41421356237... goes on forever and never settles into a repeating block. So do √3, √5, √7 and π.</p>
+    <div class="note"><b>Golden rule:</b> the square root of a perfect square is rational (√4 = 2, √9 = 3, √25 = 5). The square root of a non-perfect square is irrational.</div>
+  </section>
 
-<section>
-<h2>6. Recurring decimal lab: your first algebra trick</h2>
-<p>Enter the repeating digits (1 to 3 digits). Example: 3 for 0.333..., or 45 for 0.4545...</p>
-<div class="row"><label>0.(<input id="blk" value="45" maxlength="3" style="width:80px" inputmode="numeric">) repeating</label><button id="go">Show the steps</button></div>
-<div id="lab" class="steps mono"></div>
-<p class="sub">Rule: 1 repeating digit, multiply by 10. 2 digits, by 100. 3 digits, by 1000. The repeating "wagons" cancel when you subtract.</p>
-</section>
+  <!-- 6 -->
+  <section>
+    <h2>6. Recurring decimal lab: your first algebra trick</h2>
+    <p>Enter the repeating digits (1 to 3 digits). Example: 3 for 0.333..., or 45 for 0.4545...</p>
+    <div class="row">
+      <label>0.(<input id="blk" value="45" maxlength="3" style="width:80px" inputmode="numeric">) repeating</label>
+      <button id="go">Show the steps</button>
+    </div>
+    <div id="lab" class="steps mono"></div>
+    <p class="sub">Rule: 1 repeating digit, multiply by 10. 2 digits, by 100. 3 digits, by 1000. The repeating "wagons" cancel when you subtract.</p>
+  </section>
 
-<section>
-<h2>7. Number family explorer</h2>
-<p>Type a number: <span class="mono">7, 0, -5, 3/4, 0.25, 0.777..., sqrt(16), sqrt(7), pi</span></p>
-<div class="row"><input id="ex" value="sqrt(2)" aria-label="Number to classify" style="flex:1;min-width:160px"><button id="exGo">Where does it live?</button></div>
-<svg viewBox="0 0 600 290" role="img" aria-label="Number family diagram">
-<rect id="sR" class="set on" x="4" y="4" width="592" height="282" rx="22" style="fill:none"/>
-<text x="14" y="26">R  Real numbers</text>
-<circle id="sQ" class="set" cx="170" cy="155" r="122"/><text x="58" y="50">Q</text>
-<circle id="sZ" class="set" cx="170" cy="170" r="92"/><text x="100" y="98">Z</text>
-<circle id="sW" class="set" cx="170" cy="184" r="64"/><text x="130" y="134">W</text>
-<circle id="sN" class="set" cx="170" cy="198" r="38"/><text x="158" y="202">N</text>
-<rect id="sP" class="set" x="340" y="60" width="240" height="190" rx="20"/><text x="360" y="90">Q'  Irrational</text>
-<text x="360" y="125" style="font-weight:400;font-size:14px">&radic;2, &radic;3, &radic;5, &pi; ...</text>
-</svg>
-<div class="chips" id="exChips"></div>
-<p id="exTxt"></p>
-</section>
+  <!-- 7 -->
+  <section>
+    <h2>7. Number family explorer</h2>
+    <p>Type a number: <span class="mono">7, 0, -5, 3/4, 0.25, 0.777..., sqrt(16), sqrt(7), pi</span></p>
+    <div class="row">
+      <input id="ex" value="sqrt(2)" aria-label="Number to classify" style="flex:1;min-width:160px">
+      <button id="exGo">Where does it live?</button>
+    </div>
+    <svg viewBox="0 0 600 290" role="img" aria-label="Number family diagram">
+      <rect id="sR" class="set on" x="4" y="4" width="592" height="282" rx="22" style="fill:none"/>
+      <text x="14" y="26">R  Real numbers</text>
+      <circle id="sQ" class="set" cx="170" cy="155" r="122"/><text x="58" y="50">Q</text>
+      <circle id="sZ" class="set" cx="170" cy="170" r="92"/><text x="100" y="98">Z</text>
+      <circle id="sW" class="set" cx="170" cy="184" r="64"/><text x="130" y="134">W</text>
+      <circle id="sN" class="set" cx="170" cy="198" r="38"/><text x="158" y="202">N</text>
+      <rect id="sP" class="set" x="340" y="60" width="240" height="190" rx="20"/><text x="360" y="90">Q'  Irrational</text>
+      <text x="360" y="125" style="font-weight:400;font-size:14px">√2, √3, √5, π ...</text>
+    </svg>
+    <div class="chips" id="exChips"></div>
+    <p id="exTxt"></p>
+  </section>
 
-<section>
-<h2>8. Game: which house?</h2>
-<p>Pick the <b>smallest</b> family the number belongs to: N, W, Z, Q or Q'.</p>
-<div class="card" id="gCard"></div>
-<div class="hm" id="gBtns"></div>
-<p id="gFb" role="status"></p>
-<div class="row"><button id="gNext" disabled>Next number</button><span id="gScore" class="sub"></span></div>
-</section>
+  <!-- 8 -->
+  <section>
+    <h2>8. Game: which house?</h2>
+    <p>Pick the <b>smallest</b> family the number belongs to: N, W, Z, Q or Q'.</p>
+    <div class="card" id="gCard"></div>
+    <div class="hm" id="gBtns"></div>
+    <p id="gFb" role="status"></p>
+    <div class="row">
+      <button id="gNext" disabled>Next number</button>
+      <span id="gScore" class="sub"></span>
+    </div>
+  </section>
 
-<section id="workbook">
-<h2>9. Workbook missions</h2>
-<p>Answer fractions as <span class="mono">a/b</span> or as decimals. Equivalent answers count (2/4 = 1/2).</p>
-<div id="quizzes"></div>
-</section>
+  <!-- 9 -->
+  <section id="workbook">
+    <h2>9. Workbook missions</h2>
+    <p>Answer fractions as <span class="mono">a/b</span> or as decimals. Equivalent answers count (2/4 = 1/2).</p>
+    <div id="quizzes"></div>
+  </section>
 
-<section>
-<h2>10. Zero to Hero checklist</h2>
-<div id="check"></div>
-<p><b>One sentence to remember:</b> natural numbers count things; whole numbers add zero; integers add negatives; rational numbers can be written as fractions; irrational numbers cannot; and rational + irrational = real numbers.</p>
-<div class="badge" id="badge">Level 1 Hero Badge earned! You scored 90% or more.</div>
-</section>
+  <!-- 10 -->
+  <section>
+    <h2>10. Zero to Hero checklist</h2>
+    <div id="check"></div>
+    <p><b>One sentence to remember:</b> natural numbers count things; whole numbers add zero; integers add negatives; rational numbers can be written as fractions; irrational numbers cannot; and rational + irrational = real numbers.</p>
+    <div class="badge" id="badge">Level 1 Hero Badge earned! You scored 90% or more.</div>
+  </section>
 </main>
 
 <script>
-const $=s=>document.querySelector(s);
-const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
-let S={sec:{},game:{c:0,t:0}};
-try{S=JSON.parse(localStorage.getItem('level1'))||S}catch(e){}
-const save=()=>{try{localStorage.setItem('level1',JSON.stringify(S))}catch(e){}};
+  (function(){
+    // ---------- helpers ----------
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const gcd = (a,b) => b ? gcd(b, a % b) : Math.abs(a);
+    let S = { sec:{}, game:{ c:0, t:0 } };
+    try { S = JSON.parse(localStorage.getItem('level1')) || S; } catch(e) {}
+    const save = () => { try { localStorage.setItem('level1', JSON.stringify(S)); } catch(e) {} };
 
-/* ---- classification ---- */
-function parse(str){
- let s=str.trim().replace(/\s/g,'').toLowerCase().replace('π','pi').replace('√','sqrt').replace('…','...');
- let m;
- if(s==='pi')return{irr:1};
- if(m=s.match(/^sqrt\(?(\d+)\)?$/)){const r=Math.sqrt(+m[1]);return Number.isInteger(r)?{v:r,note:`sqrt(${m[1]}) = ${r}, a perfect square root`}:{irr:1}}
- if(m=s.match(/^(-?\d+)\/(-?\d+)$/)){if(+m[2]===0)return null;return{v:m[1]/m[2]}}
- if(m=s.match(/^-?\d+(\.\d+)?(\.\.\.)?$/))return{v:parseFloat(s),rec:!!m[2]};
- return null}
-function sets(p){
- if(p.irr)return{N:0,W:0,Z:0,Q:0,Qp:1};
- const z=Number.isInteger(p.v);return{N:z&&p.v>=1,W:z&&p.v>=0,Z:z,Q:1,Qp:0}}
-const names={N:'Natural',W:'Whole',Z:'Integer',Q:'Rational',Qp:'Irrational'};
-function explore(str){
- const p=parse(str),chips=$('#exChips');
- if(!p){chips.innerHTML='';$('#exTxt').textContent='Not recognised. Try 7, -5, 3/4, 0.25, 0.777..., sqrt(16), sqrt(7) or pi.';
-  ['N','W','Z','Q'].forEach(k=>$('#s'+k).classList.remove('on'));$('#sP').classList.remove('on');return}
- const t=sets(p);
- ['N','W','Z','Q'].forEach(k=>$('#s'+k).classList.toggle('on',!!t[k]));
- $('#sP').classList.toggle('on',!!t.Qp);
- chips.innerHTML=['N','W','Z','Q','Qp','R'].map(k=>`<span class="chip ${k} ${k==='R'||t[k]?'on':''}">${k==='Qp'?"Q'":k}</span>`).join('');
- const list=['N','W','Z','Q','Qp'].filter(k=>t[k]).map(k=>names[k]);
- $('#exTxt').textContent=(p.note?p.note+'. ':'')+(p.irr?'Its decimal never ends and never repeats, so it is irrational and real.':'It is '+list.join(', ')+' and real.')}
-$('#exGo').onclick=()=>explore($('#ex').value);
-$('#ex').onkeydown=e=>{if(e.key==='Enter')explore(e.target.value)};
-document.querySelectorAll('[data-try]').forEach(b=>b.onclick=()=>{$('#ex').value=b.dataset.try;explore(b.dataset.try);$('#ex').scrollIntoView({behavior:'smooth',block:'center'})});
-explore('sqrt(2)');
+    // ---------- classification ----------
+    function parse(str) {
+      let s = str.trim().replace(/\s/g,'').toLowerCase()
+        .replace('π','pi').replace('√','sqrt').replace('…','...');
+      let m;
+      if (s === 'pi') return { irr:1 };
+      if (m = s.match(/^sqrt\(?(\d+)\)?$/)) {
+        const r = Math.sqrt(+m[1]);
+        return Number.isInteger(r) ? { v:r, note:`sqrt(${m[1]}) = ${r}, a perfect square root` } : { irr:1 };
+      }
+      if (m = s.match(/^(-?\d+)\/(-?\d+)$/)) {
+        if (+m[2] === 0) return null;
+        return { v: m[1]/m[2] };
+      }
+      if (m = s.match(/^-?\d+(\.\d+)?(\.\.\.)?$/)) return { v:parseFloat(s), rec:!!m[2] };
+      return null;
+    }
+    function sets(p) {
+      if (p.irr) return { N:0, W:0, Z:0, Q:0, Qp:1 };
+      const z = Number.isInteger(p.v);
+      return { N: z && p.v >= 1, W: z && p.v >= 0, Z: z, Q:1, Qp:0 };
+    }
+    const names = { N:'Natural', W:'Whole', Z:'Integer', Q:'Rational', Qp:'Irrational' };
 
-/* ---- lift ---- */
-function lift(){
- const v=+$('#lift').value;$('#floor').textContent=(v>0?'+':'')+v;
- const t=sets({v});
- $('#liftOut').innerHTML=['N','W','Z'].map(k=>`<span class="chip ${k} ${t[k]?'on':''}">${names[k]}</span>`).join('');
- $('#liftTxt').textContent=v>0?`${v} floor${v>1?'s':''} above ground. ${v} is natural, whole and an integer.`:v===0?'Ground floor. 0 is whole and an integer, but not natural.':`${-v} floor${v<-1?'s':''} below ground (like ${v}°C below zero). ${v} is an integer only.`}
-$('#lift').oninput=lift;lift();
+    function explore(str) {
+      const p = parse(str), chips = $('#exChips');
+      if (!p) {
+        chips.innerHTML = '';
+        $('#exTxt').textContent = 'Not recognised. Try 7, -5, 3/4, 0.25, 0.777..., sqrt(16), sqrt(7) or pi.';
+        ['N','W','Z','Q'].forEach(k => $('#s'+k).classList.remove('on'));
+        $('#sP').classList.remove('on');
+        return;
+      }
+      const t = sets(p);
+      ['N','W','Z','Q'].forEach(k => $('#s'+k).classList.toggle('on', !!t[k]));
+      $('#sP').classList.toggle('on', !!t.Qp);
+      chips.innerHTML = ['N','W','Z','Q','Qp','R'].map(k =>
+        `<span class="chip ${k} ${k==='R'||t[k] ? 'on' : ''}">${k==='Qp' ? "Q'" : k}</span>`
+      ).join('');
+      const list = ['N','W','Z','Q','Qp'].filter(k => t[k]).map(k => names[k]);
+      $('#exTxt').textContent = (p.note ? p.note + '. ' : '') +
+        (p.irr ? 'Its decimal never ends and never repeats, so it is irrational and real.'
+               : 'It is ' + list.join(', ') + ' and real.');
+    }
 
-/* ---- pizza ---- */
-function pizza(){
- let d=Math.max(1,Math.min(12,+$('#den').value||1)),n=Math.max(0,Math.min(d,+$('#num').value||0));
- let h='';
- for(let i=0;i<d;i++){const a=2*Math.PI*i/d-Math.PI/2,b=2*Math.PI*(i+1)/d-Math.PI/2,f=i<n?'var(--Qp)':'var(--bg)';
-  h+=d===1?`<circle cx="60" cy="60" r="54" fill="${f}" stroke="var(--ink)" stroke-width="2"/>`:
-  `<path d="M60 60L${60+54*Math.cos(a)} ${60+54*Math.sin(a)}A54 54 0 ${d===2?1:0} 1 ${60+54*Math.cos(b)} ${60+54*Math.sin(b)}Z" fill="${f}" stroke="var(--ink)" stroke-width="2"/>`}
- $('#pizza').innerHTML=h;
- const g=gcd(n,d)||1,rd=d/g;let x=rd;while(x%2===0)x/=2;while(x%5===0)x/=5;
- const term=x===1,val=n/d,txt=term?String(+val.toFixed(10)):val.toFixed(8)+'...';
- $('#pizzaOut').innerHTML=`<div class="mono">${n}/${d} = ${n/g}/${rd}</div><div class="mono">= ${txt}</div><div>${term?'<span class="ok">Terminating decimal</span>':'<span class="bad">Recurring decimal</span>'}: rational either way.</div>`}
-$('#den').oninput=$('#num').oninput=pizza;pizza();
+    // ---------- lift ----------
+    function lift() {
+      const v = +$('#lift').value;
+      $('#floor').textContent = (v > 0 ? '+' : '') + v;
+      const t = sets({ v });
+      $('#liftOut').innerHTML = ['N','W','Z'].map(k =>
+        `<span class="chip ${k} ${t[k] ? 'on' : ''}">${names[k]}</span>`
+      ).join('');
+      if (v > 0) $('#liftTxt').textContent = `${v} floor${v>1?'s':''} above ground. ${v} is natural, whole and an integer.`;
+      else if (v === 0) $('#liftTxt').textContent = 'Ground floor. 0 is whole and an integer, but not natural.';
+      else $('#liftTxt').textContent = `${-v} floor${v<-1?'s':''} below ground (like ${v}°C below zero). ${v} is an integer only.`;
+    }
 
-/* ---- recurring lab ---- */
-function lab(){
- const b=$('#blk').value.replace(/\D/g,'').slice(0,3);if(!b){$('#lab').textContent='Enter 1 to 3 digits.';return}
- const n=b.length,k=10**n,r=b.repeat(4),num=+b,den=k-1,g=gcd(num,den)||1;
- $('#lab').innerHTML=[`Let x = 0.${r}...`,`Multiply by ${k}: ${k}x = ${b}.${r}...`,`Subtract:`,`&nbsp;&nbsp;${k}x = ${b}.${r}...`,`-&nbsp;&nbsp;&nbsp;x = 0.${r}...`,`------------------`,`${den}x = ${num}   (the wagons cancel)`,`x = ${num}/${den} = <b>${num/g}/${den/g}</b>`].map(s=>`<div>${s}</div>`).join('')}
-$('#go').onclick=lab;$('#blk').onkeydown=e=>{if(e.key==='Enter')lab()};lab();
+    // ---------- pizza ----------
+    function pizza() {
+      let d = Math.max(1, Math.min(12, +$('#den').value || 1));
+      let n = Math.max(0, Math.min(d, +$('#num').value || 0));
+      let h = '';
+      for (let i = 0; i < d; i++) {
+        const a = 2 * Math.PI * i / d - Math.PI / 2;
+        const b = 2 * Math.PI * (i + 1) / d - Math.PI / 2;
+        const f = i < n ? 'var(--Qp)' : 'var(--bg)';
+        h += d === 1
+          ? `<circle cx="60" cy="60" r="54" fill="${f}" stroke="var(--ink)" stroke-width="2"/>`
+          : `<path d="M60 60L${60+54*Math.cos(a)} ${60+54*Math.sin(a)}A54 54 0 ${d===2?1:0} 1 ${60+54*Math.cos(b)} ${60+54*Math.sin(b)}Z" fill="${f}" stroke="var(--ink)" stroke-width="2"/>`;
+      }
+      $('#pizza').innerHTML = h;
+      const g = gcd(n, d) || 1;
+      const rd = d / g;
+      let x = rd;
+      while (x % 2 === 0) x /= 2;
+      while (x % 5 === 0) x /= 5;
+      const term = x === 1;
+      const val = n / d;
+      const txt = term ? String(+val.toFixed(10)) : val.toFixed(8) + '...';
+      $('#pizzaOut').innerHTML =
+        `<div class="mono">${n}/${d} = ${n/g}/${rd}</div>` +
+        `<div class="mono">= ${txt}</div>` +
+        `<div>${term ? '<span class="ok">Terminating decimal</span>' : '<span class="bad">Recurring decimal</span>'}: rational either way.</div>`;
+    }
 
-/* ---- sorter game ---- */
-const deck=[['7','N','7 is a counting number.'],['0','W','0 is whole but not natural.'],['-4','Z','Negative whole numbers are integers.'],['1/2','Q','A fraction that is not an integer.'],['√2','Qp','Not a perfect square: irrational.'],['√25','N','√25 = 5, a natural number.'],['π','Qp','π never ends and never repeats.'],['0.25','Q','0.25 = 1/4.'],['0.777…','Q','Recurring: 0.777... = 7/9.'],['√7','Qp','7 is not a perfect square.'],['√16','N','√16 = 4.'],['12/4','N','12/4 = 3.'],['-5','Z','Negative, so integer only.']];
-let order=[],gi=0,locked=false;
-const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
-function gameInit(){order=shuf(deck);gi=0;showCard()}
-function showCard(){
- if(gi>=order.length){$('#gCard').textContent='Round complete!';$('#gBtns').innerHTML='';$('#gNext').textContent='Play again';$('#gNext').disabled=false;$('#gNext').onclick=gameInit;$('#gFb').textContent='';return}
- locked=false;$('#gCard').textContent=order[gi][0];$('#gFb').textContent='';$('#gNext').textContent='Next number';$('#gNext').disabled=true;
- $('#gNext').onclick=()=>{gi++;showCard()};
- $('#gBtns').innerHTML=['N','W','Z','Q','Qp'].map(k=>`<button data-k="${k}">${k==='Qp'?"Q'":k}</button>`).join('');
- document.querySelectorAll('#gBtns button').forEach(b=>b.onclick=()=>pick(b.dataset.k));
- scoreTxt()}
-function pick(k){
- if(locked)return;locked=true;const c=order[gi],ok=k===c[1];
- S.game.t++;if(ok)S.game.c++;save();
- $('#gFb').innerHTML=ok?`<span class="ok">Correct!</span> ${c[2]}`:`<span class="bad">Not quite.</span> It lives in ${c[1]==='Qp'?"Q'":c[1]}. ${c[2]}`;
- $('#gNext').disabled=false;scoreTxt();progress()}
-const scoreTxt=()=>$('#gScore').textContent=`Game score: ${S.game.c}/${S.game.t}`;
+    // ---------- recurring lab ----------
+    function lab() {
+      const b = $('#blk').value.replace(/\D/g,'').slice(0,3);
+      if (!b) { $('#lab').textContent = 'Enter 1 to 3 digits.'; return; }
+      const n = b.length, k = 10 ** n;
+      const r = b.repeat(4);
+      const num = +b, den = k - 1;
+      const g = gcd(num, den) || 1;
+      $('#lab').innerHTML = [
+        `Let x = 0.${r}...`,
+        `Multiply by ${k}: ${k}x = ${b}.${r}...`,
+        `Subtract:`,
+        `&nbsp;&nbsp;${k}x = ${b}.${r}...`,
+        `-&nbsp;&nbsp;&nbsp;x = 0.${r}...`,
+        `------------------`,
+        `${den}x = ${num}   (the wagons cancel)`,
+        `x = ${num}/${den} = <b>${num/g}/${den/g}</b>`
+      ].map(s => `<div>${s}</div>`).join('');
+    }
 
-/* ---- workbook ---- */
-const quizzes=[
- {id:'tf',title:'Mission 1: True or false?',tf:1,items:[['Every natural number is a whole number.',1],['Every whole number is an integer.',1],['Every integer is rational.',1],['Every rational number is an integer.',0],['√16 is irrational.',0],['√3 is irrational.',1],['π is rational.',0],['0 is a rational number.',1]]},
- {id:'f2d',title:'Mission 2: Fraction to decimal',items:[['1/2',.5],['1/4',.25],['3/4',.75],['1/5',.2],['3/5',.6],['7/10',.7]]},
- {id:'d2f',title:'Mission 3: Decimal to fraction',items:[['0.5',.5],['0.25',.25],['0.75',.75],['0.2',.2],['0.8',.8],['0.125',.125]]},
- {id:'rec',title:'Mission 4: Recurring decimals to fractions',items:[['0.333...',1/3],['0.777...',7/9],['0.1212...',4/33],['0.4545...',5/11],['0.2727...',3/11],['0.1818...',2/11]]}];
-function num(s){s=s.trim();let m;if(m=s.match(/^(-?\d+)\/(\d+)$/))return+m[2]?m[1]/m[2]:NaN;return/^-?\d*\.?\d+$/.test(s)?parseFloat(s):NaN}
-$('#quizzes').innerHTML=quizzes.map(q=>`<details open><summary>${q.title} <span id="r-${q.id}" class="sub"></span></summary>`+q.items.map((it,i)=>`<div class="q"><span>${it[0]}</span>${q.tf?`<select id="${q.id}${i}"><option value="">?</option><option value="1">True</option><option value="0">False</option></select>`:`<input id="${q.id}${i}" aria-label="Answer for ${it[0]}">`}<span id="${q.id}${i}r"></span></div>`).join('')+`<div class="row"><button data-q="${q.id}">Check answers</button></div></details>`).join('');
-document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{
- const q=quizzes.find(x=>x.id===b.dataset.q);let c=0;
- q.items.forEach((it,i)=>{const el=$('#'+q.id+i),v=q.tf?(el.value===''?NaN:+el.value):num(el.value),ok=Math.abs(v-it[1])<1e-9;if(ok)c++;
-  $('#'+q.id+i+'r').innerHTML=isNaN(v)?'<span class="sub">answer me</span>':ok?'<span class="ok">✓</span>':`<span class="bad">✗ ${q.tf?(it[1]?'True':'False'):''}</span>`});
- S.sec[q.id]={c,t:q.items.length};save();$('#r-'+q.id).textContent=`${c}/${q.items.length}`;progress()});
-quizzes.forEach(q=>{if(S.sec[q.id])$('#r-'+q.id).textContent=`${S.sec[q.id].c}/${S.sec[q.id].t}`});
+    // ---------- sorter game ----------
+    const deck = [
+      ['7','N','7 is a counting number.'],
+      ['0','W','0 is whole but not natural.'],
+      ['-4','Z','Negative whole numbers are integers.'],
+      ['1/2','Q','A fraction that is not an integer.'],
+      ['√2','Qp','Not a perfect square: irrational.'],
+      ['√25','N','√25 = 5, a natural number.'],
+      ['π','Qp','π never ends and never repeats.'],
+      ['0.25','Q','0.25 = 1/4.'],
+      ['0.777…','Q','Recurring: 0.777... = 7/9.'],
+      ['√7','Qp','7 is not a perfect square.'],
+      ['√16','N','√16 = 4.'],
+      ['12/4','N','12/4 = 3.'],
+      ['-5','Z','Negative, so integer only.']
+    ];
+    let order = [], gi = 0, locked = false;
+    const shuf = a => a.map(x => [Math.random(), x]).sort((p,q) => p[0]-q[0]).map(x => x[1]);
 
-/* ---- checklist + progress ---- */
-const items=['What a natural number is','Why zero belongs to whole numbers','Why negative numbers are integers','What a fraction represents','What a rational number is','What a recurring decimal is','How to convert a recurring decimal to a fraction','What makes a number irrational','Why √16 is rational but √7 is irrational','Why every integer is rational','How N, W, Z, Q and Q\' fit together','Why rational + irrational = real'];
-$('#check').innerHTML=items.map((t,i)=>`<label style="display:block"><input type="checkbox" data-c="${i}" ${S['c'+i]?'checked':''}> ${t}</label>`).join('');
-document.querySelectorAll('[data-c]').forEach(c=>c.onchange=()=>{S['c'+c.dataset.c]=c.checked;save();progress()});
-function progress(){
- let c=S.game.c,t=S.game.t,done=0;
- quizzes.forEach(q=>{if(S.sec[q.id]){c+=S.sec[q.id].c;t+=S.sec[q.id].t;done++}});
- const checks=items.filter((_,i)=>S['c'+i]).length;
- const p=Math.round(100*(done/quizzes.length*.5+Math.min(1,S.game.t/deck.length)*.2+checks/items.length*.3));
- $('#prog').style.width=p+'%';$('#progTxt').textContent=p+'%';
- $('#badge').classList.toggle('show',done===quizzes.length&&S.game.t>=deck.length&&t&&c/t>=.9)}
-$('#reset').onclick=()=>{if(confirm('Clear all saved progress?')){try{localStorage.removeItem('level1')}catch(e){}location.reload()}};
-gameInit();progress();
+    function gameInit() { order = shuf(deck); gi = 0; showCard(); }
+    function showCard() {
+      if (gi >= order.length) {
+        $('#gCard').textContent = 'Round complete!';
+        $('#gBtns').innerHTML = '';
+        $('#gNext').textContent = 'Play again';
+        $('#gNext').disabled = false;
+        $('#gNext').onclick = gameInit;
+        $('#gFb').textContent = '';
+        return;
+      }
+      locked = false;
+      $('#gCard').textContent = order[gi][0];
+      $('#gFb').textContent = '';
+      $('#gNext').textContent = 'Next number';
+      $('#gNext').disabled = true;
+      $('#gNext').onclick = () => { gi++; showCard(); };
+      $('#gBtns').innerHTML = ['N','W','Z','Q','Qp'].map(k =>
+        `<button data-k="${k}">${k==='Qp' ? "Q'" : k}</button>`
+      ).join('');
+      $$('#gBtns button').forEach(b => b.onclick = () => pick(b.dataset.k));
+      scoreTxt();
+    }
+    function pick(k) {
+      if (locked) return;
+      locked = true;
+      const c = order[gi], ok = k === c[1];
+      S.game.t++;
+      if (ok) S.game.c++;
+      save();
+      $('#gFb').innerHTML = ok
+        ? `<span class="ok">Correct!</span> ${c[2]}`
+        : `<span class="bad">Not quite.</span> It lives in ${c[1]==='Qp' ? "Q'" : c[1]}. ${c[2]}`;
+      $('#gNext').disabled = false;
+      scoreTxt();
+      progress();
+    }
+    const scoreTxt = () => $('#gScore').textContent = `Game score: ${S.game.c}/${S.game.t}`;
+
+    // ---------- workbook ----------
+    const quizzes = [
+      { id:'tf', title:'Mission 1: True or false?', tf:1, items:[
+        ['Every natural number is a whole number.',1],
+        ['Every whole number is an integer.',1],
+        ['Every integer is rational.',1],
+        ['Every rational number is an integer.',0],
+        ['√16 is irrational.',0],
+        ['√3 is irrational.',1],
+        ['π is rational.',0],
+        ['0 is a rational number.',1]
+      ]},
+      { id:'f2d', title:'Mission 2: Fraction to decimal', items:[
+        ['1/2',.5],['1/4',.25],['3/4',.75],['1/5',.2],['3/5',.6],['7/10',.7]
+      ]},
+      { id:'d2f', title:'Mission 3: Decimal to fraction', items:[
+        ['0.5',.5],['0.25',.25],['0.75',.75],['0.2',.2],['0.8',.8],['0.125',.125]
+      ]},
+      { id:'rec', title:'Mission 4: Recurring decimals to fractions', items:[
+        ['0.333...',1/3],['0.777...',7/9],['0.1212...',4/33],['0.4545...',5/11],['0.2727...',3/11],['0.1818...',2/11]
+      ]}
+    ];
+    function num(s) {
+      s = s.trim();
+      let m;
+      if (m = s.match(/^(-?\d+)\/(\d+)$/)) return +m[2] ? m[1]/m[2] : NaN;
+      return /^-?\d*\.?\d+$/.test(s) ? parseFloat(s) : NaN;
+    }
+
+    // build quizzes
+    $('#quizzes').innerHTML = quizzes.map(q =>
+      `<details open><summary>${q.title} <span id="r-${q.id}" class="sub"></span></summary>` +
+      q.items.map((it, i) =>
+        `<div class="q"><span>${it[0]}</span>` +
+        (q.tf
+          ? `<select id="${q.id}${i}"><option value="">?</option><option value="1">True</option><option value="0">False</option></select>`
+          : `<input id="${q.id}${i}" aria-label="Answer for ${it[0]}">`) +
+        `<span id="${q.id}${i}r"></span></div>`
+      ).join('') +
+      `<div class="row"><button data-q="${q.id}">Check answers</button></div></details>`
+    ).join('');
+
+    // wire quiz buttons
+    $$('[data-q]').forEach(b => b.onclick = () => {
+      const q = quizzes.find(x => x.id === b.dataset.q);
+      let c = 0;
+      q.items.forEach((it, i) => {
+        const el = $('#' + q.id + i);
+        const v = q.tf ? (el.value === '' ? NaN : +el.value) : num(el.value);
+        const ok = Math.abs(v - it[1]) < 1e-9;
+        if (ok) c++;
+        $('#' + q.id + i + 'r').innerHTML = isNaN(v)
+          ? '<span class="sub">answer me</span>'
+          : ok ? '<span class="ok">✓</span>' : `<span class="bad">✗ ${q.tf ? (it[1] ? 'True' : 'False') : ''}</span>`;
+      });
+      S.sec[q.id] = { c, t: q.items.length };
+      save();
+      $('#r-' + q.id).textContent = `${c}/${q.items.length}`;
+      progress();
+    });
+
+    // restore quiz scores
+    quizzes.forEach(q => {
+      if (S.sec[q.id]) $('#r-' + q.id).textContent = `${S.sec[q.id].c}/${S.sec[q.id].t}`;
+    });
+
+    // ---------- checklist & progress ----------
+    const items = [
+      'What a natural number is',
+      'Why zero belongs to whole numbers',
+      'Why negative numbers are integers',
+      'What a fraction represents',
+      'What a rational number is',
+      'What a recurring decimal is',
+      'How to convert a recurring decimal to a fraction',
+      'What makes a number irrational',
+      'Why √16 is rational but √7 is irrational',
+      'Why every integer is rational',
+      'How N, W, Z, Q and Q\' fit together',
+      'Why rational + irrational = real'
+    ];
+    $('#check').innerHTML = items.map((t, i) =>
+      `<label style="display:block"><input type="checkbox" data-c="${i}" ${S['c'+i] ? 'checked' : ''}> ${t}</label>`
+    ).join('');
+    $$('[data-c]').forEach(c => c.onchange = () => {
+      S['c' + c.dataset.c] = c.checked;
+      save();
+      progress();
+    });
+
+    function progress() {
+      let c = S.game.c, t = S.game.t, done = 0;
+      quizzes.forEach(q => {
+        if (S.sec[q.id]) { c += S.sec[q.id].c; t += S.sec[q.id].t; done++; }
+      });
+      const checks = items.filter((_, i) => S['c' + i]).length;
+      const p = Math.round(100 * (
+        done / quizzes.length * 0.5 +
+        Math.min(1, S.game.t / deck.length) * 0.2 +
+        checks / items.length * 0.3
+      ));
+      $('#prog').style.width = p + '%';
+      $('#progTxt').textContent = p + '%';
+      $('#badge').classList.toggle('show',
+        done === quizzes.length && S.game.t >= deck.length && t && c / t >= 0.9
+      );
+    }
+
+    // ---------- reset ----------
+    $('#reset').onclick = () => {
+      if (confirm('Clear all saved progress?')) {
+        try { localStorage.removeItem('level1'); } catch(e) {}
+        location.reload();
+      }
+    };
+
+    // ---------- wire up static controls ----------
+    $('#exGo').onclick = () => explore($('#ex').value);
+    $('#ex').onkeydown = e => { if (e.key === 'Enter') explore(e.target.value); };
+    $$('[data-try]').forEach(b => b.onclick = () => {
+      $('#ex').value = b.dataset.try;
+      explore(b.dataset.try);
+      $('#ex').scrollIntoView({ behavior:'smooth', block:'center' });
+    });
+    explore('sqrt(2)');
+
+    $('#lift').oninput = lift;
+    lift();
+
+    $('#den').oninput = $('#num').oninput = pizza;
+    pizza();
+
+    $('#go').onclick = lab;
+    $('#blk').onkeydown = e => { if (e.key === 'Enter') lab(); };
+    lab();
+
+    // start game & progress
+    gameInit();
+    progress();
+  })();
 </script>
 </body>
 </html>
